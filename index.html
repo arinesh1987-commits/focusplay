@@ -6,185 +6,156 @@
 <title>FocusPlay</title>
 
 <style>
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: #0f172a;
-  color: white;
+  margin:0;
+  font-family:'Segoe UI',sans-serif;
+  background:#0f172a;
+  color:white;
 }
 
-/* APP CONTAINER */
 .app {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
+  display:flex;
+  flex-direction:column;
+  height:100vh;
 }
 
-/* CONTENT */
 .content {
-  flex: 1;
-  padding: 20px;
+  flex:1;
+  padding:20px;
 }
 
-/* CARD */
 .card {
-  background: #1e293b;
-  border-radius: 20px;
-  padding: 20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  background:#1e293b;
+  border-radius:20px;
+  padding:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.4);
 }
 
-/* HEADER */
 .header {
-  display: flex;
-  justify-content: space-between;
-  font-size: 16px;
-  margin-bottom: 10px;
+  display:flex;
+  justify-content:space-between;
 }
 
-/* TIMER */
 .timer {
-  font-size: 56px;
-  text-align: center;
-  margin: 30px 0;
-  font-weight: bold;
+  font-size:50px;
+  text-align:center;
+  margin:25px 0;
 }
 
-/* ROW */
 .row {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 10px;
+  display:flex;
+  gap:10px;
+  margin-bottom:10px;
 }
 
-/* BUTTON */
 button {
-  flex: 1;
-  padding: 12px;
-  border: none;
-  border-radius: 12px;
-  font-size: 15px;
-  cursor: pointer;
-  transition: 0.15s;
+  flex:1;
+  padding:12px;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
 }
 
-button:active {
-  transform: scale(0.95);
-}
+.mode { background:#334155; color:white; }
+.start { background:#22c55e; }
+.pause { background:#f59e0b; }
+.reset { background:#ef4444; }
 
-/* COLORS */
-.mode { background: #334155; color: white; }
-.start { background: #22c55e; }
-.pause { background: #f59e0b; }
-.reset { background: #ef4444; }
-
-/* NAV BAR */
 .nav {
-  height: 60px;
-  background: #020617;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  border-top: 1px solid #1e293b;
+  height:60px;
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  background:#020617;
 }
 
 .nav button {
-  background: none;
-  color: #94a3b8;
-  font-size: 20px;
+  background:none;
+  color:#94a3b8;
+  font-size:20px;
 }
 
 .nav button.active {
-  color: #38bdf8;
+  color:#38bdf8;
 }
 
-/* SCREEN */
-.screen {
-  display: none;
-}
+.screen { display:none; }
+.screen.active { display:block; }
 
-.screen.active {
-  display: block;
-  animation: fade 0.3s ease;
-}
-
-@keyframes fade {
-  from {opacity:0; transform:translateY(10px);}
-  to {opacity:1; transform:translateY(0);}
-}
-
-/* STATS */
-.stat-box {
-  background: #1e293b;
-  padding: 15px;
-  border-radius: 15px;
-  margin-bottom: 10px;
+.stat {
+  background:#1e293b;
+  padding:15px;
+  border-radius:15px;
+  margin-bottom:10px;
 }
 </style>
 
 </head>
+
 <body>
 
 <div class="app">
 
-  <div class="content">
+<div class="content">
 
-    <!-- HOME -->
-    <div id="home" class="screen active">
-      <div class="card">
+<!-- HOME -->
+<div id="home" class="screen active">
+  <div class="card">
 
-        <div class="header">
-          <div>🔥 <span id="streak">0</span></div>
-          <div>🪙 <span id="coins">0</span></div>
-        </div>
-
-        <div id="timer" class="timer">10:00</div>
-
-        <div class="row">
-          <button class="mode" onclick="setMode(600)">Normal</button>
-          <button class="mode" onclick="setMode(1500)">Pomodoro</button>
-        </div>
-
-        <div class="row">
-          <button class="start" onclick="startTimer()">Start</button>
-          <button class="pause" onclick="pauseTimer()">Pause</button>
-          <button class="reset" onclick="resetTimer()">Reset</button>
-        </div>
-
-      </div>
+    <div class="header">
+      <div>🔥 <span id="streak">0</span></div>
+      <div>🪙 <span id="coins">0</span></div>
     </div>
 
-    <!-- STATS -->
-    <div id="stats" class="screen">
-      <div class="stat-box">Sessions: <span id="sessions">0</span></div>
-      <div class="stat-box">Time: <span id="time">0</span> min</div>
+    <div id="timer" class="timer">10:00</div>
+
+    <div class="row">
+      <button class="mode" onclick="setMode(600)">Normal</button>
+      <button class="mode" onclick="setMode(1500)">Pomodoro</button>
+    </div>
+
+    <div class="row">
+      <button class="start" onclick="startTimer()">Start</button>
+      <button class="pause" onclick="pauseTimer()">Pause</button>
+      <button class="reset" onclick="resetTimer()">Reset</button>
     </div>
 
   </div>
+</div>
 
-  <!-- NAVIGATION -->
-  <div class="nav">
-    <button onclick="switchTab('home', this)" class="active">🏠</button>
-    <button onclick="switchTab('stats', this)">📊</button>
-  </div>
+<!-- STATS -->
+<div id="stats" class="screen">
+  <div class="stat">Sessions: <span id="sessions">0</span></div>
+  <div class="stat">Time: <span id="time">0</span> min</div>
+</div>
+
+</div>
+
+<div class="nav">
+  <button onclick="switchTab('home', this)" class="active">🏠</button>
+  <button onclick="switchTab('stats', this)">📊</button>
+</div>
 
 </div>
 
 <script>
 
-// DATA
-let coins = +localStorage.getItem("coins") || 0;
-let streak = +localStorage.getItem("streak") || 0;
-let sessions = +localStorage.getItem("sessions") || 0;
-let timeSpent = +localStorage.getItem("time") || 0;
+let coins = localStorage.getItem("coins") || 0;
+let streak = localStorage.getItem("streak") || 0;
+let sessions = localStorage.getItem("sessions") || 0;
+let timeSpent = localStorage.getItem("time") || 0;
 
-// TIMER
 let timeLeft = 600;
 let interval = null;
+
+function updateUI(){
+  document.getElementById("coins").innerText = coins;
+  document.getElementById("streak").innerText = streak;
+  document.getElementById("sessions").innerText = sessions;
+  document.getElementById("time").innerText = timeSpent;
+}
 
 function setMode(sec){
   timeLeft = sec;
@@ -209,10 +180,10 @@ function startTimer(){
       clearInterval(interval);
       interval = null;
 
-      coins += 10;
-      streak++;
-      sessions++;
-      timeSpent += 10;
+      coins = Number(coins) + 10;
+      streak = Number(streak) + 1;
+      sessions = Number(sessions) + 1;
+      timeSpent = Number(timeSpent) + 10;
 
       save();
       alert("Session Completed!");
@@ -232,7 +203,6 @@ function resetTimer(){
   updateTimer();
 }
 
-// NAVIGATION
 function switchTab(id, btn){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
@@ -241,25 +211,16 @@ function switchTab(id, btn){
   btn.classList.add('active');
 }
 
-// SAVE
 function save(){
   localStorage.setItem("coins", coins);
   localStorage.setItem("streak", streak);
   localStorage.setItem("sessions", sessions);
   localStorage.setItem("time", timeSpent);
-  load();
-}
-
-// LOAD
-function load(){
-  document.getElementById("coins").innerText = coins;
-  document.getElementById("streak").innerText = streak;
-  document.getElementById("sessions").innerText = sessions;
-  document.getElementById("time").innerText = timeSpent;
+  updateUI();
 }
 
 window.onload = ()=>{
-  load();
+  updateUI();
   updateTimer();
 };
 
